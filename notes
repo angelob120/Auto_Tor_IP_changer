@@ -1,0 +1,15 @@
+brew services restart tor
+brew install telnet
+ControlPort 9051
+CookieAuthentication 1
+SocksPort 9052
+ControlPort 9053
+HashedControlPassword 16:157DBAD6B40602A1607A935C65E0DE3F5F7426ED319C9E31A0BBCF4C38
+
+
+
+source venv/bin/activate
+
+
+
+tor -f /Users/angelobrown/Downloads/Auto_Tor_IP_changer/torrc

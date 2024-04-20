@@ -1,18 +1,34 @@
 import os
-choice = input('[+] to install press (Y) to uninstall press (N) >> ')
-run = os.system
-if str(choice) =='Y' or str(choice)=='y':
 
-    run('chmod 777 autoTOR.py')
-    run('mkdir /usr/share/aut')
-    run('cp autoTOR.py /usr/share/aut/autoTOR.py')
+def install():
+    print("[+] Installing Auto Tor IP Changer...")
+    os.system('chmod 777 autoTOR.py')
+    os.system('mkdir -p /usr/local/share/aut')
+    os.system('cp autoTOR.py /usr/local/share/aut/autoTOR.py')
 
-    cmnd=(' #! /bin/sh \n exec python3 /usr/share/aut/autoTOR.py "$@"')
-    with open('/usr/bin/aut','w')as file:
-        file.write(cmnd)
-    run('chmod +x /usr/bin/aut & chmod +x /usr/share/aut/autoTOR.py')
-    print('''\n\ncongratulation auto Tor Ip Changer is installed successfully \nfrom now just type \x1b[6;30;42maut\x1b[0m in terminal ''')
-if str(choice)=='N' or str(choice)=='n':
-    run('rm -r /usr/share/aut ')
-    run('rm /usr/bin/aut ')
-    print('[!] now Auto Tor Ip changer  has been removed successfully')
+    command = '#! /bin/sh\nexec python3 /usr/local/share/aut/autoTOR.py "$@"'
+    with open('/usr/local/bin/aut', 'w') as file:
+        file.write(command)
+    
+    os.system('chmod +x /usr/local/bin/aut')
+    os.system('chmod +x /usr/local/share/aut/autoTOR.py')
+    print('''\n\nCongratulations! Auto Tor IP Changer is installed successfully.
+From now, just type 'aut' in the terminal to use it.''')
+
+def uninstall():
+    print("[+] Uninstalling Auto Tor IP Changer...")
+    os.system('rm -rf /usr/local/share/aut')
+    os.system('rm /usr/local/bin/aut')
+    print('[!] Auto Tor IP Changer has been removed successfully.')
+
+def main():
+    choice = input('[+] To install press (Y), to uninstall press (N) >> ')
+    if choice.lower() == 'y':
+        install()
+    elif choice.lower() == 'n':
+        uninstall()
+    else:
+        print("[!] Invalid input. Please enter 'Y' to install or 'N' to uninstall.")
+
+if __name__ == '__main__':
+    main()
